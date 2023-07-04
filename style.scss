@@ -1,0 +1,956 @@
+/* Typography
+-------------------------------------------------------------- */
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('https://raw.githubusercontent.com/10clouds/codepen/tesla-hero-slider/tesla-hero-slider/src/assets/fonts/BebasNeue-Regular.otf');
+}
+
+$headers-family:              'BebasNeue','Helvetica', 'Arial', sans-serif;
+$base-font-family:            'Helvetica', 'Arial', sans-serif;
+$font-color:                  #fff;
+
+/* Breakpoints
+-------------------------------------------------------------- */
+// Extra small screen / phone
+$screen-xs:                  480px !default;
+
+// Small screen / tablet
+$screen-sm:                  768px !default;
+
+// Medium screen / desktop
+$screen-md:                  992px !default;
+
+// Large screen / wide desktop
+$screen-lg:                  1200px !default;
+
+// Large screen / wide desktop
+$screen-lg-xl:               1800px !default;
+
+$screen-xs-max:              ($screen-sm - 1) !default;
+$screen-sm-max:              ($screen-md - 1) !default;
+$screen-md-max:              ($screen-lg - 1) !default;
+
+/* Media queries
+-------------------------------------------------------------- */
+$screen:                      "only screen";
+
+$media-lg-xl:                 "#{$screen} and (min-width:#{$screen-lg-xl})";
+$media-lg:                    "#{$screen} and (min-width:#{$screen-lg})";
+
+$media-md-up:                 "#{$screen} and (min-width:#{$screen-md})";
+$media-md:                    "#{$screen} and (min-width:#{$screen-md}) and (max-width:#{$screen-md-max})";
+$media-to-md:                 "#{$screen} and (max-width:#{$screen-md-max})";
+
+$media-sm-up:                 "#{$screen} and (min-width:#{$screen-sm})";
+$media-sm:                    "#{$screen} and (min-width:#{$screen-sm}) and (max-width:#{$screen-sm-max})";
+$media-to-sm:                 "#{$screen} and (max-width:#{$screen-sm-max})";
+
+$media-xs-up:                 "#{$screen} and (min-width:#{$screen-xs})";
+$media-xs:                    "#{$screen} and (max-width:#{$screen-xs-max})";
+$media-xs-small:              "#{$screen} and (max-width:#{$screen-xs})";
+
+* {
+  box-sizing: border-box;
+}
+
+
+:root {
+  --btn-color: white;
+  --car-color: white;
+  --bckg-height: 300px;
+  --shadow-opacity: 0.2;
+  --car-shadow-height: 300px;
+}
+
+body {
+  background-color: black;
+  overflow-x: hidden;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  max-width: 780px;
+  padding: 10px;
+  margin: 0 auto;
+
+  @media #{$media-sm-up}{
+    padding: 0 20px;
+  }
+
+  @media #{$media-md}{
+    max-width: 1000px;
+  }
+
+  @media #{$media-lg}{
+    max-width: 1200px;
+  }
+
+  @media #{$media-lg-xl}{
+    max-width: 1550px;
+  }
+}
+
+/* Body, html
+-------------------------------------------------------------- */
+
+html{
+  font-size: 62.5%;
+}
+
+body{
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 22px;
+  line-height: 2.2rem;
+  font-family: $base-font-family;
+  color: $font-color;
+
+  @media #{$media-md-up} {
+    font-size: 16px;
+    font-size: 1.6rem;
+    line-height: 26px;
+    line-height: 2.6rem;
+  }
+
+  @media #{$media-lg-xl}{
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+}
+
+/* Headers
+-------------------------------------------------------------- */
+
+h1{
+  margin: 0;
+  font-size: 5.5rem;
+  line-height: 1;
+  font-family: $headers-family;
+  letter-spacing: 0.9px;
+  font-weight: 500;
+
+  @media #{$media-sm-up}{
+    font-size: 7rem;
+  }
+
+  @media #{$media-lg}{
+    font-size: 8rem;
+  }
+
+  @media #{$media-lg-xl}{
+    font-size: 9.2rem;
+  }
+}
+
+
+/* Text, Links
+-------------------------------------------------------------- */
+a{
+  text-decoration: none;
+  color: $font-color;
+}
+
+
+/* Button
+-------------------------------------------------------------- */
+.button {
+  position: relative;
+  height: 55px;
+  width: 180px;
+  background: none;
+  color: $font-color;
+  font-size: 1.4rem;
+  font-weight: 300;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+
+  @media #{$media-md-up} {
+    font-size: 1.8rem;
+    width: 210px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+
+    &:before {
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    background-color: var(--btn-color);
+    transition: all 0.3s;
+    z-index: -1;
+  }
+
+  &__border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 55px;
+    width: 180px;
+    border: 1px solid var(--btn-color);
+    transition: all 0.6s ease-in-out;
+
+    &:after {
+      position: absolute;
+      content: '';
+      left: 50%;
+      top: 50%;
+      width: 150%;
+      height: 220%;
+      opacity: 0.3;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, var(--btn-color) 1%, transparent 80%);
+      z-index: -1;
+      transition: opacity 0.6s ease-in-out, background 0.6s linear 0.5s;
+    }
+
+    @media #{$media-md-up} {
+      width: 210px;
+    }
+
+    &--enter {
+      border: 1px solid transparent;
+
+      &:after {
+        opacity: 0;
+        background: transparent;
+      }
+    }
+
+    &--exit {
+      border: 1px solid transparent;
+
+      &:after {
+        opacity: 0.2;
+        background: transparent;
+      }
+    }
+  }
+}
+
+
+/* Header
+-------------------------------------------------------------- */
+.tesla-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 0;
+
+  @media #{$media-lg}{
+    padding: 50px 0 60px;
+  }
+
+  @media #{$media-lg-xl}{
+    padding: 80px 0;
+  }
+
+  &__logo{
+    img{
+      height: 12.5px;
+      width: auto;
+    }
+  }
+
+  &__nav{
+    img{
+      height: 20px;
+      width: auto;
+    }
+  }
+}
+
+
+/* Slide Item
+-------------------------------------------------------------- */
+.tesla-slide {
+  position: relative;
+  margin-top: 50px;
+  width: 100%;
+  order: 1;
+
+  @media #{$media-sm-up} {
+    margin-top: 70px;
+  }
+
+  @media #{$media-lg} {
+    margin-top: 0;
+    width: calc(100% - 150px);
+  }
+
+  /* Slide Item Img
+  -------------------------------------------------------------- */
+  &__img {
+    $parent: &;
+    position: absolute;
+    overflow: hidden;
+    transform: translateX(0) scale(1);
+    transition: opacity 0.8s ease-in-out 0.05s, transform 0.8s ease-in-out 0.1s;
+
+    @media #{$media-xs} {
+      width: 100%;
+      transform: none;
+      overflow: initial;
+    }
+
+    @media #{$media-sm-up} {
+      margin-top: 0;
+      top: -5%;
+      right: -50%;
+      z-index: -1;
+    }
+
+    @media #{$media-md-up} {
+      top: -35%;
+      right: -25%;
+    }
+
+    @media #{$media-lg-xl} {
+      top: -50%;
+      right: -19%;
+    }
+
+    &:before {
+      position: absolute;
+      content: '';
+      width: calc(var(--car-shadow-height));
+      height: calc(var(--car-shadow-height) * 1.4);
+      top: 45%;
+      left: 60%;
+      transform: translate(-50%, -50%);
+      opacity: 0.35;
+      background: radial-gradient(ellipse at center, var(--car-color) 10%, transparent 75%);
+      transition: opacity 0.5s ease-in 0.3s;
+      z-index: 9;
+
+      @media #{$media-md-up} {
+        width: calc(var(--car-shadow-height) * 2);
+        height: calc(var(--car-shadow-height) * 1.8);
+        opacity: 0.4;
+      }
+    }
+
+    &-floor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: all 0.7s ease-in-out 0.4s;
+    }
+
+    &-car {
+      transition: opacity 0.6s ease-in-out 0.1s;
+    }
+
+    &--enter {
+      opacity: 0;
+      transform: translateX(-5%) scale(1.1);
+
+      #{$parent}-floor {
+        opacity: 0;
+      }
+
+      #{$parent}-car {
+        opacity: 0;
+      }
+
+      &:before {
+        opacity: 0;
+      }
+
+      .animation-back & {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+
+    &--exit {
+      transition: opacity 0.5s ease-in-out 0.4s, transform 0.8s ease-in-out 0.3s;
+      opacity: 0;
+      transform: scale(0.9);
+
+      #{$parent}-floor {
+        transition: all 0.5s ease-in-out 0.2s;
+        opacity: 0;
+      }
+
+      &:before {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+      }
+
+      .animation-back & {
+        transition: opacity 0.5s ease-in-out 0.6s, transform 0.9s ease-in-out 0.1s;
+        transform: translateX(-5%) scale(1.1);
+
+        #{$parent}-floor {
+          transition: all 0.5s ease-in-out 0.2s;
+          opacity: 0;
+        }
+
+        #{$parent}-car {
+          transition: opacity 0.6s ease-in-out 0.5s;
+          opacity: 0;
+        }
+
+        &:before {
+          transition: opacity 0.5s ease-in 0.3s;
+        }
+      }
+    }
+
+    img {
+      max-width: 100%;
+      min-width: 600px;
+      transform: translateX(-50%);
+      margin: -100px 0 0 55%;
+
+      @media #{$media-xs-small} {
+        margin: -10px 0 0 40%;
+      }
+
+      @media #{$media-sm-up} {
+        max-width: 85%;
+        transform: none;
+        margin: -40px 0 0;
+      }
+
+      @media #{$media-md-up} {
+        min-width: 800px;
+        margin-top: 0;
+        max-width: 1300px;
+      }
+
+      @media #{$media-lg-xl} {
+        max-width: 2000px;
+      }
+    }
+  }
+
+  /* Slide Item Img
+  -------------------------------------------------------------- */
+  &__bckg {
+    $parent: &;
+    position: absolute;
+    right: 5%;
+    bottom: 38%;
+    width: 250px;
+    height: calc(var(--bckg-height) / 2.2);
+    z-index: -1;
+
+    @media #{$media-xs-small} {
+      right: 3%;
+      bottom: 35%;
+      height: calc(var(--bckg-height) / 2.5);
+    }
+
+    @media #{$media-sm-up} {
+      width: 300px;
+      height: calc(var(--bckg-height) / 1.8);
+      bottom: 40%;
+      right: 0;
+    }
+
+    @media #{$media-md-up} {
+      width: 400px;
+      height: calc(var(--bckg-height) / 1.5);
+      right: -2%;
+    }
+
+    @media #{$media-lg} {
+      bottom: 56%;
+    }
+
+    @media #{$media-lg-xl} {
+      height: var(--bckg-height);
+      width: 570px;
+      right: 2%;
+    }
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: '';
+      transition: all 0.8s ease-in-out 0.3s;
+    }
+
+    &:after {
+      width: calc(var(--bckg-height) * 1.2);
+      height: calc(var(--bckg-height) * 0.8);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+      background: radial-gradient(ellipse at center, var(--car-color) 25%, transparent 65%);
+
+      @media #{$media-sm-up} {
+        width: calc(var(--bckg-height) * 2);
+        height: calc(var(--bckg-height) * 1.5);
+      }
+
+      @media #{$media-lg-xl} {
+        width: calc(var(--bckg-height) * 3.5);
+        height: calc(var(--bckg-height) * 2.2);
+      }
+    }
+
+    &:before {
+      width: calc(var(--bckg-height) * 1.5);
+      height: calc(var(--bckg-height) * 0.7);
+      top: 70%;
+      left: -40%;
+      opacity: var(--shadow-opacity);
+      background: radial-gradient(ellipse at center, var(--car-color) 10%, transparent 65%);
+
+      @media #{$media-sm-up} {
+        width: calc(var(--bckg-height) * 3.5);
+        height: var(--bckg-height);
+        top: 100%;
+        left: -80%;
+      }
+
+      @media #{$media-lg-xl} {
+        width: calc(var(--bckg-height) * 4.5);
+      }
+    }
+
+    &-fill {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0.8;
+      background: var(--car-color);
+      transition: all 0.8s ease-in 0.3s, transform 0.8s ease-in-out, background 0s;
+    }
+
+    &--enter {
+      #{$parent}-fill {
+        height: 0;
+        top: 0;
+        bottom: 100%;
+        opacity: 0.3;
+        transform: translateY(-20px) scale(1.1);
+        transition: all 0.7s ease-in 0.5s, transform 0.8s ease-in-out 0.1s, background 0s;
+      }
+
+      &:before,
+      &:after {
+        opacity: 0;
+      }
+
+      .animation-back & {
+        #{$parent}-fill {
+          bottom: 0;
+          top: 100%;
+          transform: translateY(10px) scale(0.9);
+        }
+      }
+    }
+
+    &--exit {
+      #{$parent}-fill {
+        transition: all 0.6s ease-in 0.1s, background 0s;
+        height: 0;
+        top: 100%;
+        bottom: 0;
+        opacity: 0.2;
+        transform: translateY(10px) scale(0.9);
+      }
+
+      &:before {
+        transition: all 0.6s ease-in-out 0.2s;
+      }
+
+      &:before,
+      &:after {
+        opacity: 0;
+      }
+
+      .animation-back & {
+        #{$parent}-fill {
+          top: 0;
+          bottom: 100%;
+          transform: translateY(-20px) scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+/* Slide Item Aside
+-------------------------------------------------------------- */
+.tesla-slide-aside {
+  text-align: left;
+
+  @media #{$media-xs} {
+    padding-left: 20px;
+  }
+
+  @media #{$media-xs-small} {
+    padding-left: 0;
+  }
+
+  /* Slide Item Whole name
+  -------------------------------------------------------------- */
+  &__wholename {
+    height: auto;
+
+    @media #{$media-sm-up} {
+      height: 75px;
+    }
+
+    > span {
+      height: 55px;
+      vertical-align: top;
+
+      @media #{$media-sm-up} {
+        height: 75px;
+      }
+    }
+  }
+
+  /* Slide Item Name
+  -------------------------------------------------------------- */
+  &__name {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    overflow: hidden;
+
+    @media #{$media-xs} {
+      width: 65%;
+    }
+
+    @media #{$media-xs-small} {
+      width: 230px;
+    }
+
+    &-part {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 1;
+      display: block;
+      margin-left: 15px;
+      transition: top 0.5s ease-out 0.1s, opacity 0.4s linear;
+
+      &--enter {
+        left: 0;
+        top: 100%;
+        opacity: 0;
+
+        .animation-back & {
+          top: -100%;
+        }
+      }
+
+      &--exit {
+        left: 0;
+        top: -100%;
+        opacity: 0;
+        transition: top 0.5s ease-out 0.4s, opacity 0.4s linear 0.4s;
+
+        .animation-back & {
+          top: 100%;
+        }
+      }
+    }
+  }
+
+  /* Slide Item Description
+  -------------------------------------------------------------- */
+  &__desc {
+    position: relative;
+    margin: 10px 0 0;
+    max-width: 420px;
+    height: 5rem;
+    overflow: hidden;
+
+    @media #{$media-sm-up} {
+      margin-top: 40px;
+    }
+
+    &-text {
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: 0;
+      line-height: 2.5rem;
+      letter-spacing: 0.5px;
+      font-weight: 300;
+      opacity: 1;
+      transition: top 0.4s ease-out 0.2s, bottom 0.4s ease-out 0.2s, opacity 0.4s ease-out 0.3s, line-height 0.3s ease-out 0.5s;
+
+      &--enter {
+        left: 0;
+        top: 100%;
+        bottom: 0;
+        opacity: 0;
+        line-height: 4rem;
+
+        .animation-back & {
+          top: -100%;
+          bottom: auto;
+          line-height: 3rem;
+        }
+      }
+
+      &--exit {
+        transition: bottom 0.5s ease-out 0.3s, top 0.5s ease-out 0.3s, opacity 0.4s ease-out 0.3s, line-height 0.3s ease-out 0.2s;
+        left: 0;
+        top: auto;
+        bottom: 100%;
+        opacity: 0;
+        line-height: 4rem;
+
+        .animation-back & {
+          top: 100%;
+          bottom: auto;
+        }
+      }
+    }
+  }
+
+  /* Slide Button
+  -------------------------------------------------------------- */
+  &__button {
+    position: relative;
+    height: 50px;
+    margin-top: 25px;
+
+    @media #{$media-sm-up} {
+      margin-top: 50px;
+    }
+
+    button{
+      z-index: 1;
+    }
+  }
+}
+
+
+
+/* Slide Params
+  -------------------------------------------------------------- */
+.tesla-slide-params {
+  $parent: &;
+  margin: 250px 0 30px;
+
+  @media #{$media-xs-small} {
+    margin-top: 350px;
+  }
+
+  @media #{$media-sm-up} {
+    margin-top: 130px;
+  }
+
+  @media #{$media-md-up} {
+    margin: 170px 0 20px;
+  }
+
+  @media #{$media-lg-xl} {
+    margin: 225px 0 80px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+
+    @media #{$media-lg} {
+      padding-left: 10%; //to center - amount of width of right slider nav
+    }
+  }
+
+  &__item {
+    text-align: center;
+    width: 190px;
+
+
+    &:first-of-type{
+      #{$parent}__wrapper{
+        padding-left: 10px;
+        width: 160px;
+        text-align: left;
+
+        #{$parent}__value{
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  &__wrapper{
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  &__value {
+    padding: 0 8px;
+    font-size: 3.1rem;
+    transition: opacity 0.05s ease-in;
+
+    @media #{$media-sm-up} {
+      font-size: 4.8rem;
+    }
+
+    &--enter {
+      opacity: 0.7;
+    }
+
+    &--exit {
+      opacity: 0;
+    }
+  }
+
+  &__prefix {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 2rem;
+
+    @media #{$media-sm-up} {
+      font-size: 3rem;
+    }
+  }
+
+  &__name {
+    margin-top: -5px;
+    font-size: 1.4rem;
+  }
+
+  &__sufix {
+    font-family: $headers-family;
+    letter-spacing: 0.9px;
+    font-size: initial;
+  }
+}
+
+
+/* Slider
+-------------------------------------------------------------- */
+.tesla-slider {
+  padding-top: 20px;
+
+  @media #{$media-md-up} {
+    padding-top: 40px;
+  }
+
+  @media #{$media-lg} {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 0;
+  }
+
+  @media #{$media-lg-xl} {
+    padding-top: 135px;
+  }
+
+  /* Mouse scroll
+  -------------------------------------------------------------- */
+  &__scroll{
+    order: 3;
+    width: 100%;
+
+    img{
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+
+
+
+/* Slider Navigation
+-------------------------------------------------------------- */
+.tesla-slider-navigation {
+
+  @media #{$media-lg}{
+    order: 2;
+    width: 150px;
+  }
+
+  /* Slider Navigation List
+  -------------------------------------------------------------- */
+  &__list{
+    display: flex;
+    margin: 0;
+    justify-content: space-around;
+    text-align: center;
+
+    @media #{$media-sm-up}{
+      margin: 5px;
+    }
+
+    @media #{$media-lg}{
+      display: block;
+      order: 2;
+      text-align: right;
+    }
+  }
+
+  /* Slider Navigation List item
+  -------------------------------------------------------------- */
+  &__item{
+    display: inline-block;
+    padding: 0 5px;
+    text-transform: uppercase;
+    line-height: 1;
+    font-size: 1.2rem;
+
+    @media #{$media-sm-up}{
+      font-size: 1.5rem;
+      letter-spacing: 0.6px;
+    }
+
+    @media #{$media-lg}{
+      display: block;
+      margin-top: 90px;
+    }
+
+    @media #{$media-lg-xl}{
+      margin-top: 95px;
+    }
+
+    &:first-of-type{
+      margin-top: 0;
+    }
+  }
+
+  &__link{
+    &--active{
+      font-size: 1.2rem;
+      transition: font-size 0.3s linear , color 0.2s linear 0.8s;
+
+      @media #{$media-sm-up}{
+        font-size: 1.4rem;
+      }
+
+      @media #{$media-lg}{
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
