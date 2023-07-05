@@ -1,6 +1,9 @@
 import './style';
-
-const { TransitionGroup, CSSTransition } = ReactTransitionGroup;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import PropTypes from 'prop-types';
+import BezierEasing from 'bezier-easing';
 
 /* Slides data
 -------------------------------------------------------------- */
